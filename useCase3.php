@@ -60,20 +60,21 @@ class StudentGroup
             $totalScore += $student->score;
         }
 
-        $avgScore = $totalScore / count($this->students);
+        $avgScore = round($totalScore / count($this->students), 2);
 
         return $avgScore;
     }
 
-    // public function addStudent($student)
-    // {
-    //     array_push($this->students, $student);
-    // }
-    // public function removeStudent($student)
-    // {
-    //     $index = array_search($student, $this->students);
-    //     array_splice($this->students, $index, 1);
-    // }
+    public function addStudent($student)
+    {
+        array_push($this->students, $student);
+    }
+    public function removeStudent($student)
+    {
+        $index = array_keys($this->students, $student)[0];
+
+        array_splice($this->students, $index, 1);
+    }
 }
 
 // create group 1
@@ -114,19 +115,42 @@ $group2 = new StudentGroup([
 echo $group2->calcAvgScore() . '<br>';
 
 
-// function moveStudent($student, $fromGroup, $toGroup)
-// {
-//     // check if student is in fromGroup
-//     if (in_array($student, $fromGroup->students)) {
-//         echo 'yes <br>';
-//     } else {
-//         echo 'no <br>';
-//     }
+function moveStudent($student, $fromGroup, $toGroup)
+{
+    $studentInGroup = in_array($student, $fromGroup->students);
+    if (!$studentInGroup) {
+        echo 'student not in group <br>';
+        return;
+    }
 
-//     // add student to toGroup
+    $toGroup->addStudent($student);
+    $fromGroup->removeStudent($student);
+}
 
-//     // remove student from fromGroup
+function printGroupOverview($groupsStudents)
+{
+    echo ' contains: <br>';
 
-// }
+    foreach ($groupsStudents as $student) {
+        echo ' - ' . $student->name . '<br>';
+    }
+}
 
-// moveStudent($student11, $group1, $group2);
+
+// move student
+echo 'group1';
+printGroupOverview($group1->students);
+echo 'group2';
+printGroupOverview($group2->students);
+
+moveStudent($student1, $group1, $group2);
+moveStudent($student3, $group1, $group2);
+moveStudent($student5, $group1, $group2);
+
+echo 'group1';
+printGroupOverview($group1->students);
+echo 'group2';
+printGroupOverview($group2->students);
+
+echo 'Score average group1: ' . $group1->calcAvgScore() . '<br>';
+echo 'Score average group2: ' . $group2->calcAvgScore() . '<br>';
