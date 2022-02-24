@@ -43,7 +43,7 @@ class StudentGroup
     public function __construct(array $students)
     {
         if (count($students) !== 10) {
-            echo 'not 10 <br>';
+            echo 'Error: need 10 students to create a group. <br>';
             return;
         }
         $this->students = [];
