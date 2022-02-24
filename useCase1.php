@@ -84,6 +84,50 @@ function calcTotalPrice($basket)
     return $totalPrice;
 }
 
-echo calcTotalPrice($basket);
+echo 'Without classes: <br>';
+echo 'total price: ' . calcTotalPrice($basket);
 echo '<br>';
-echo calcTotalTax($basket);
+echo 'total tax: ' . calcTotalTax($basket);
+echo '<br><br>';
+
+
+/*
+Next, do the same with classes. What style do you prefer? Do you notice any difference in time needed to code, structure or readability? From now on, if nothing is stated specifically, it's recommended to use classes.
+*/
+
+class FoodItem
+{
+    public string $name;
+    public float $price;
+    public float $tax;
+    public int $number;
+
+    public function __construct($name, $price, $tax, $number)
+    {
+        $this->name = $name;
+        $this->price = $price;
+        $this->tax = $tax;
+        $this->number = $number;
+    }
+
+    public function calcTotalPrice()
+    {
+        return $this->price * $this->number;
+    }
+
+    public function calcTotalTax()
+    {
+        return $this->calcTotalPrice() * $this->tax;
+    }
+}
+
+$bananas = new FoodItem('banana', 1, .06, 6);
+$apples = new FoodItem('apple', 1.5, .06, 3);
+$wine = new FoodItem('wine', 10, .21, 2);
+
+echo 'With classes:<br>';
+echo 'total price: ';
+echo $bananas->calcTotalPrice() + $apples->calcTotalPrice() + $wine->calcTotalPrice();
+echo '<br>';
+echo 'total tax: ';
+echo $bananas->calcTotalTax() + $apples->calcTotalTax() + $wine->calcTotalTax();
