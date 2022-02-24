@@ -64,18 +64,27 @@ class Vacancy extends Content
     }
 }
 
-$ad = new Ad('Ad Title', 'Ad Text');
-$article = new Article('Article Title', 'Article Text');
-$vacancy = new Vacancy('Vacancy Title', 'Vacancy Text');
-
 $content = [
-    new Ad('Ad Title', 'Ad Text'),
-    new Article('Article #1 Title', 'Article #1 Text'),
-    new Article('Article #2 Title', 'Article #2 Text', true),
-    new Vacancy('Vacancy Title', 'Vacancy Text'),
+    new Ad(
+        'Butter',
+        'Butter is slippery. That\'s why we eat as much as possible, to lubricate our arteries and veins'
+    ),
+    new Article(
+        'Disappointed Baby Takes Plastic Bag Off Head After Reading ‘Warning: Not A Children’s Toy’',
+        'WINNETKA, IL—Disappointed that the object was not the intriguing plaything he had initially perceived it to be, local 8-month-old child Josiah O’Connell reportedly removed the plastic bag from his head Wednesday after reading, “Warning: Not A…',
+        true
+    ),
+    new Article(
+        'Military Recruiter’s Pitch Surprisingly Upfront About How Many Civilians You Get To Kill',
+        'HARVEY, IL—A group of high schoolers were reportedly left astonished Wednesday after a military recruiter’s pitch was surprisingly upfront about how many civilians you get to kill. “It wasn’t even hidden in there, it was, like, the second or third…',
+    ),
+    new Vacancy(
+        'Surgeon Wanted',
+        'for a new health clinic opening in the area. No experience needed. Must have own tools.'
+    ),
 ];
 
 foreach ($content as $item) {
-    echo $item->getTitle() . '<br>';
-    echo $item->text . '<br>';
+    echo '<h3>' . $item->getTitle() . '</h3><br>';
+    echo '<p>' . $item->text . '</p><br>';
 }
