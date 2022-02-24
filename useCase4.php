@@ -31,14 +31,25 @@ class Content
     }
 }
 
-class Ad extends Content
+class Article extends Content
 {
+    public bool $breakingNews;
+
+    public function __construct($title, $text, $breakingNews = false)
+    {
+        parent::__construct($title, $text);
+        $this->breakingNews = $breakingNews;
+    }
     public function getTitle()
     {
-        return $this->title;
+        if ($this->breakingNews) {
+            return 'BREAKING: ' . $this->title;
+        } else {
+            return $this->title;
+        }
     }
 }
-class Article extends Content
+class Ad extends Content
 {
     public function getTitle()
     {
@@ -57,6 +68,14 @@ $ad = new Ad('Ad Title', 'Ad Text');
 $article = new Article('Article Title', 'Article Text');
 $vacancy = new Vacancy('Vacancy Title', 'Vacancy Text');
 
-echo $ad->getTitle() . '<br>';
-echo $article->getTitle() . '<br>';
-echo $vacancy->getTitle() . '<br>';
+$content = [
+    new Ad('Ad Title', 'Ad Text'),
+    new Article('Article #1 Title', 'Article #1 Text'),
+    new Article('Article #2 Title', 'Article #2 Text', true),
+    new Vacancy('Vacancy Title', 'Vacancy Text'),
+];
+
+foreach ($content as $item) {
+    echo $item->getTitle() . '<br>';
+    echo $item->text . '<br>';
+}
