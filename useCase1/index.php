@@ -1,6 +1,6 @@
 <?php
 
-include_once './phpSettings.php';
+include_once '../phpSettings.php';
 require_once './FoodItem.php';
 require_once './Basket.php';
 

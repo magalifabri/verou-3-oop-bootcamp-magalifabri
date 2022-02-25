@@ -1,7 +1,5 @@
 <?php
 
-include_once './phpSettings.php';
-
 class Basket
 {
     public array $items;
